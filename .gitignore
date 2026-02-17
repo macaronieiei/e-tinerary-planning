@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Environment variables
+/backend/.env
+/frontend/.env
+
+# Build outputs
+dist/
+build/
+
+# TypeScript cache / outputs
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mac / Windows hidden files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (ถ้าไม่ต้องการแชร์)
+.vscode/
+
+# Optional: Supabase local files
+.supabase/
