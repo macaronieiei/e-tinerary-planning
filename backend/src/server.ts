@@ -1,11 +1,11 @@
-import app from "./app";
+import express from "express";
+import cors from "cors";
+import authRoutes from "./features/auth/authRoutes";
 
-app.get("/api/test", (_req, res) => {
-  res.json({ message: "Backend working 🚀" });
-});
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-const PORT = 5000;
+app.use("/api/auth", authRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(5000, () => console.log("Server running on port 5000"));
