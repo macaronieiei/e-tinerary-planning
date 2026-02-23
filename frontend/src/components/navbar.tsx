@@ -1,14 +1,23 @@
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../config/db";
+import { useAuth } from "../features/auth/hooks/useAuth";
 import "./navbar.css";
+
 
 export default function Navbar({ username }: any) {
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || "";
+  const { logout, session } = useAuth();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
+  await fetch(`${API_URL}/api/auth/logout`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session?.access_token}`, // ส่ง token ไปบอก Supabase
+    },
+  });
+  logout(); // ล้าง localStorage + context
+  navigate("/");
+};
 
   return (
     <nav className="animate-slide-down font-sarabun sticky top-0 z-50 w-full px-6 py-3 flex items-center justify-between bg-white/70 backdrop-blur-xl border-b border-[#ffb6b9]/30 shadow-sm">

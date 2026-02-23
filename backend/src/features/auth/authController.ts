@@ -121,3 +121,12 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+// Logout
+export const logout = async (req: Request, res: Response) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (token) {
+    await supabase.auth.admin.signOut(token); // บอก Supabase ว่า signOut
+  }
+  res.json({ message: "Logout สำเร็จ" });
+};
+
