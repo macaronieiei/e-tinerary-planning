@@ -16,7 +16,7 @@ export default function Navbar({ username }: any) {
       {/* Logo */}
       <div className="animate-fade-in-1 flex items-center gap-2">
         <span className="text-2xl">🌸</span>
-        <span className="font-prompt font-extrabold text-lg text-[#6b3a2a]">e-tinerary</span>
+        <span className="font-prompt font-extrabold text-lg text-[#6b3a2a]">E-tinerary Planning Trip</span>
       </div>
 
       {/* Right side */}

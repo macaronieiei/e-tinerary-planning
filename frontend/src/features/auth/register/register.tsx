@@ -11,23 +11,29 @@ export default function Register() {
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [shakeKey, setShakeKey] = useState(0);
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/auth/register", {
+    const res = await fetch(`${API_URL}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password, age, gender }),
     });
     const data = await res.json();
-    setMessage(data.message);
-    if (!data.message.includes("Error")) {
+
+    if (res.ok) {
       setIsError(false);
+      setIsEmailDuplicate(false);
+      setMessage(data.message);
       navigate("/confirm-email");
     } else {
       setIsError(true);
       setShakeKey((k) => k + 1);
+      setMessage(data.message);
+      setIsEmailDuplicate(res.status === 409);
     }
   };
 
@@ -128,16 +134,25 @@ export default function Register() {
 
           {/* Message */}
           {message && (
-            <p
+            <div
               key={shakeKey}
-              className={`animate-shake text-center text-sm rounded-xl px-4 py-2 ${
-                isError
+              className={`animate-shake text-center text-sm rounded-xl px-4 py-2 ${isError
                   ? "text-red-400 bg-red-50 border border-red-200"
                   : "text-green-600 bg-green-50 border border-green-200"
-              }`}
+                }`}
             >
-              {isError ? "⚠️" : "✅"} {message}
-            </p>
+              <p>{isError ? "⚠️" : "✅"} {message}</p>
+              {isEmailDuplicate && (
+                <p className="mt-1">
+                  <span
+                    onClick={() => navigate("/login")}
+                    className="font-semibold text-[#6b3a2a] underline underline-offset-2 cursor-pointer hover:text-[#ffb6b9] transition-colors duration-200"
+                  >
+                    คลิกที่นี่เพื่อเข้าสู่ระบบ →
+                  </span>
+                </p>
+              )}
+            </div>
           )}
 
           {/* Submit */}

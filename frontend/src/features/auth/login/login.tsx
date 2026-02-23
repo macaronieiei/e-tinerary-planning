@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import "./login.css";
 
-export default function Login({ setUser }: any) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [shakeKey, setShakeKey] = useState(0);
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -21,11 +24,11 @@ export default function Login({ setUser }: any) {
     const data = await res.json();
 
     if (res.status === 200) {
-      setUser(data.user);
+      login(data.user, data.session); // ✅ เก็บ user + session ลง context + localStorage
       navigate("/home");
     } else {
       setMessage(data.message);
-      setShakeKey((k) => k + 1); // trigger shake animation
+      setShakeKey((k) => k + 1);
     }
   };
 

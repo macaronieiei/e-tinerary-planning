@@ -1,8 +1,10 @@
+import { useAuth } from "../auth/hooks/useAuth";
 import Navbar from "../../components/navbar";
 import "./Home.css";
 
-export default function Home({ user }: any) {
-  const username = user?.username || user?.user_metadata?.username;
+export default function Home() {
+  const { user } = useAuth(); // ✅ ดึงจาก context แทน props
+  const username = user?.username;
 
   return (
     <div className="font-sarabun relative min-h-screen bg-[#fae3d9] overflow-hidden">
