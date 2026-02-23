@@ -1,6 +1,6 @@
 import { useAuth } from "../auth/hooks/useAuth";
 import Navbar from "../../components/navbar";
-import "./Home.css";
+import "./home.css";
 
 export default function Home() {
   const { user } = useAuth(); // ✅ ดึงจาก context แทน props
