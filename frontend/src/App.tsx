@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Welcome from "./features/welcome/welcome";
+import Welcome from "./features/welcome/welcome.tsx";
 import Register from "./features/auth/register/register";
 import ConfirmEmail from "./features/auth/confirmEmail/confirmEmail";
 import Login from "./features/auth/login/login";
-import Dashboard from "./features/home/home";
+import Dashboard from "./features/home/home.tsx";
 import ProtectedRoute from "./features/auth/components/ProtectedRoute";
 
 export default function App() {
