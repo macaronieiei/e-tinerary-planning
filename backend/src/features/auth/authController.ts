@@ -4,6 +4,7 @@ import { supabase } from "../../config/db";
 // Register
 export const register = async (req: Request, res: Response) => {
   const { username, email, password, age, gender } = req.body;
+  const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 
   try {
     // 1️⃣ สร้าง user ใน Supabase Auth ก่อน
@@ -11,7 +12,7 @@ export const register = async (req: Request, res: Response) => {
       email,
       password,
       options: {
-        emailRedirectTo: "http://localhost:5173/login",
+        emailRedirectTo: `${frontendUrl}/login`,
         data: { username },
       },
     });
@@ -61,7 +62,6 @@ export const register = async (req: Request, res: Response) => {
     res.status(500).json({ message: err.message });
   }
 };
-
 
 // Login
 export const login = async (req: Request, res: Response) => {

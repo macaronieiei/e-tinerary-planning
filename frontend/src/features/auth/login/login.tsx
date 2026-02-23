@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "./login.css";
@@ -7,10 +7,22 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const [shakeKey, setShakeKey] = useState(0);
   const navigate = useNavigate();
   const { login } = useAuth();
   const API_URL = import.meta.env.VITE_API_URL || "";
+
+  // ✅ รับ token หลังยืนยัน email แล้ว redirect มาที่ /login
+  useEffect(() => {
+    const hash = window.location.hash;
+    console.log("hash:", window.location.hash); // ดูว่ามี hash ไหม
+    if (hash.includes("access_token") && hash.includes("type=signup")) {
+      setIsSuccess(true);
+      setMessage("ยืนยันอีเมลสำเร็จ! กรุณาเข้าสู่ระบบ");
+      window.history.replaceState(null, "", "/login");
+    }
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -24,9 +36,10 @@ export default function Login() {
     const data = await res.json();
 
     if (res.status === 200) {
-      login(data.user, data.session); // ✅ เก็บ user + session ลง context + localStorage
+      login(data.user, data.session);
       navigate("/home");
     } else {
+      setIsSuccess(false);
       setMessage(data.message);
       setShakeKey((k) => k + 1);
     }
@@ -87,13 +100,17 @@ export default function Login() {
             />
           </div>
 
-          {/* Error message */}
+          {/* Message — รองรับทั้ง success และ error */}
           {message && (
             <p
               key={shakeKey}
-              className="animate-shake text-center text-sm text-red-400 bg-red-50 border border-red-200 rounded-xl px-4 py-2"
+              className={`animate-shake text-center text-sm rounded-xl px-4 py-2 ${
+                isSuccess
+                  ? "text-green-600 bg-green-50 border border-green-200"
+                  : "text-red-400 bg-red-50 border border-red-200"
+              }`}
             >
-              ⚠️ {message}
+              {isSuccess ? "✅" : "⚠️"} {message}
             </p>
           )}
 
