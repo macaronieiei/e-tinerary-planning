@@ -1,19 +1,17 @@
+// เอาไว้เรียกใช้ feature ต่างๆของระบบ
 import express from "express";
 import cors from "cors";
-import authRoutes from "./features/auth/authRoutes";
-import placesRoutes from "./features/places/placesRoutes";
+// Import routes ของแต่ละ feature
+// ex. import userRoutes from "./features/users/user.routes";
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    process.env.FRONTEND_URL || "",
-  ],
-}));
-app.use(express.json());
+// ใช้ route ของแต่ละ feature แบบรวมทั้ง feature 
+// routes ย่อยของเเต่ละ feature เขียนใน ไฟล์ route ของ feature นั้นๆ
+// app.use("/api/users", userRoutes);
+// ตั้งชื่อ route ตามที่ต้องการ เช่น /api/users สำหรับ user feature
 
-app.use("/api/auth", authRoutes);
-app.use("/api/places", placesRoutes);
+app.use(cors());
+app.use(express.json());
 
 export default app;
