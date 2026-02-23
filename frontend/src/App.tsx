@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Welcome from "./features/welcome/Welcome";
-import Register from "./features/auth/Register";
-import ConfirmEmail from "./features/auth/ConfirmEmail";
-import Login from "./features/auth/Login";
-import Dashboard from "./features/dashboard/home";
+import Welcome from "./features/welcome/welcome";
+import Register from "./features/auth/register/register";
+import ConfirmEmail from "./features/auth/confirmEmail/confirmEmail";
+import Login from "./features/auth/login/login";
+import Dashboard from "./features/home/home";
 
 export default function App() {
   const [user, setUser] = useState<any>(null);
@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/confirm-email" element={<ConfirmEmail />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/dashboard" element={<Dashboard user={user} />} />
+        <Route path="/home" element={<Dashboard user={user} />} />
       </Routes>
     </BrowserRouter>
   );
