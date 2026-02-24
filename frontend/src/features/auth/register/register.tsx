@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Register.css";
+import "./register.css";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -43,23 +43,23 @@ export default function Register() {
   const labelClass = "font-prompt text-sm font-semibold text-[#6b3a2a]";
 
   return (
-    <div className="font-sarabun relative min-h-screen flex items-center justify-center overflow-hidden bg-[#fae3d9] py-10">
+    <div className="font-sarabun relative min-h-screen flex items-center justify-center overflow-hidden bg-[#fcedd3] py-10">
 
       {/* Background blobs */}
-      <div className="blob-1 absolute -top-20 -left-20 w-80 h-80 rounded-full bg-[#ffb6b9] opacity-50 blur-[70px] pointer-events-none" />
-      <div className="blob-2 absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#61c0bf] opacity-40 blur-[70px] pointer-events-none" />
-      <div className="blob-3 absolute top-16 right-24 w-52 h-52 rounded-full bg-[#bbded6] opacity-40 blur-[60px] pointer-events-none" />
+      <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-[#5990c0] opacity-30 blur-[70px] pointer-events-none" />
+      <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-[#015185] opacity-25 blur-[70px] pointer-events-none" />
+      <div className="absolute top-16 right-24 w-52 h-52 rounded-full bg-[#102a6b] opacity-20 blur-[60px] pointer-events-none" />
 
       {/* Card */}
-      <div className="animate-slide-up-1 relative z-10 w-[90%] max-w-md px-12 py-14 rounded-[36px] border border-white/80 shadow-2xl bg-white/70 backdrop-blur-2xl">
+      <div className="animate-slide-up-1 relative z-10 w-[90%] max-w-md px-12 py-14 rounded-[36px] border border-[#5990c0]/30 shadow-2xl bg-white/80 backdrop-blur-xl">
 
         {/* Header */}
         <div className="text-center mb-8">
-          <span className="block text-5xl mb-4">🌷</span>
-          <h2 className="animate-slide-up-2 font-prompt font-extrabold text-3xl text-[#6b3a2a]">
+          <span className="block text-5xl mb-4">🗺️</span>
+          <h2 className="animate-slide-up-2 font-prompt font-extrabold text-3xl text-[#102a6b]">
             สมัครสมาชิก
           </h2>
-          <p className="animate-slide-up-3 text-[#9c6b55] text-sm mt-1">
+          <p className="animate-slide-up-3 text-[#5990c0] text-sm mt-1">
             สร้างบัญชีใหม่กับเรา
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function Register() {
             />
           </div>
 
-          {/* Age + Gender row */}
+          {/* Age + Gender */}
           <div className="animate-slide-up-6 flex gap-3">
             <div className="flex flex-col gap-1 w-1/2">
               <label className={labelClass}>อายุ</label>
@@ -137,7 +137,7 @@ export default function Register() {
             <div
               key={shakeKey}
               className={`animate-shake text-center text-sm rounded-xl px-4 py-2 ${isError
-                  ? "text-red-400 bg-red-50 border border-red-200"
+                  ? "text-red-500 bg-red-50 border border-red-200"
                   : "text-green-600 bg-green-50 border border-green-200"
                 }`}
             >
@@ -146,7 +146,7 @@ export default function Register() {
                 <p className="mt-1">
                   <span
                     onClick={() => navigate("/login")}
-                    className="font-semibold text-[#6b3a2a] underline underline-offset-2 cursor-pointer hover:text-[#ffb6b9] transition-colors duration-200"
+                    className="font-semibold text-[#015185] underline underline-offset-2 cursor-pointer hover:text-[#102a6b] transition-colors duration-200"
                   >
                     คลิกที่นี่เพื่อเข้าสู่ระบบ →
                   </span>
@@ -158,18 +158,18 @@ export default function Register() {
           {/* Submit */}
           <button
             type="submit"
-            className="animate-slide-up-7 font-prompt font-semibold w-full py-4 mt-2 rounded-2xl text-[#6b3a2a] bg-gradient-to-r from-[#ffb6b9] to-[#fae3d9] shadow-[0_6px_20px_rgba(255,182,185,0.5)] hover:shadow-[0_10px_28px_rgba(255,182,185,0.65)] hover:-translate-y-0.5 active:scale-[0.97] transition-all duration-200"
+            className="animate-slide-up-7 font-prompt font-semibold w-full py-4 mt-2 rounded-2xl text-white bg-gradient-to-r from-[#102a6b] to-[#015185] shadow-[0_6px_20px_rgba(1,81,133,0.4)] hover:shadow-[0_10px_28px_rgba(1,81,133,0.6)] hover:-translate-y-0.5 active:scale-[0.97] transition-all duration-200"
           >
             สมัครสมาชิก
           </button>
         </form>
 
         {/* Footer */}
-        <p className="animate-slide-up-8 text-center text-sm text-[#9c6b55] mt-6">
+        <p className="animate-slide-up-8 text-center text-sm text-[#5990c0] mt-6">
           มีบัญชีอยู่แล้ว?{" "}
           <span
             onClick={() => navigate("/login")}
-            className="font-semibold text-[#6b3a2a] underline underline-offset-2 cursor-pointer hover:text-[#ffb6b9] transition-colors duration-200"
+            className="font-semibold text-[#015185] underline underline-offset-2 cursor-pointer hover:text-[#102a6b] transition-colors duration-200"
           >
             เข้าสู่ระบบ
           </span>
@@ -177,10 +177,10 @@ export default function Register() {
 
         {/* Dots */}
         <div className="flex justify-center gap-2 mt-8">
-          <div className="w-2 h-2 rounded-full bg-[#ffb6b9]" />
-          <div className="w-2 h-2 rounded-full bg-[#fae3d9]" />
-          <div className="w-2 h-2 rounded-full bg-[#bbded6]" />
-          <div className="w-2 h-2 rounded-full bg-[#61c0bf]" />
+          <div className="w-2 h-2 rounded-full bg-[#102a6b]" />
+          <div className="w-2 h-2 rounded-full bg-[#015185]" />
+          <div className="w-2 h-2 rounded-full bg-[#5990c0]" />
+          <div className="w-2 h-2 rounded-full bg-[#cfe5f6]" />
         </div>
       </div>
     </div>
